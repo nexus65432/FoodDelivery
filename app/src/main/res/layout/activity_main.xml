@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.android.fooddelivery.ui.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recylerView"
+        style="@style/TTListView"
+        />
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:text="@string/error_message"
+        android:textColor="@color/color_black"
+        android:textSize="18sp" />
+
+    <ProgressBar
+        android:id="@+id/progressbar_cyclic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:minHeight="50dp"
+        android:minWidth="50dp"
+        android:visibility="visible" />
+
+</RelativeLayout>
