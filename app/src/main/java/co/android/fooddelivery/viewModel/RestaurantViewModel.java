@@ -95,7 +95,7 @@ public class RestaurantViewModel extends ViewModel {
     public List<RestaurantModel> getListFromServerResponse(@NonNull JsonArray value) {
 
         List<RestaurantModel> modelList = null;
-        if (value != null) {
+        if (value != null && value.size() > 0) {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<RestaurantInfo>>() {}.getType();
             List<RestaurantInfo> items = gson.fromJson(value.toString(), listType);
@@ -103,16 +103,22 @@ public class RestaurantViewModel extends ViewModel {
             // This layer of abstraction is added to pass data which is required for the list.
             modelList = new ArrayList<>(items.size());
             for (RestaurantInfo info : items) {
-                RestaurantModel model = new RestaurantModel();
-                model.setRestaurantDescription(info.getDescription());
-                model.setRestaurantImageUrl(info.getImageUrl());
-                model.setRestaurantName(info.getBusiness().getName());
-                if (TextUtils.equals(info.getStatusType(), "open")) {
-                    model.setStatus(info.getStatus());
-                } else {
-                    model.setStatus(info.getStatusType());
+                if (info != null) {
+                    RestaurantModel model = new RestaurantModel();
+                    model.setRestaurantDescription(info.getDescription());
+                    model.setRestaurantImageUrl(info.getImageUrl());
+                    if (info.getBusiness() != null && info.getBusiness().getName() != null) {
+                        model.setRestaurantName(info.getBusiness().getName());
+                    }
+
+                    // ToDo: Define as constant variable
+                    if ("open".equals(info.getStatusType())) {
+                        model.setStatus(info.getStatus());
+                    } else {
+                        model.setStatus(info.getStatusType());
+                    }
+                    modelList.add(model);
                 }
-                modelList.add(model);
             }
         }
         return modelList;
