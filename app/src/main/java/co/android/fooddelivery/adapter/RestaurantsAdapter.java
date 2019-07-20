@@ -1,6 +1,7 @@
 package co.android.fooddelivery.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import java.util.List;
 import co.android.fooddelivery.R;
 import co.android.fooddelivery.listener.RecyclerViewClickListener;
 import co.android.fooddelivery.model.RestaurantModel;
+import co.android.fooddelivery.util.MySharedPreference;
 
 /**
  * Adapter providing a binding Restaurant data set to views that are displayed in List
@@ -67,6 +69,9 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<Restaurant> {
             if (restaurant.getStatus() != null) {
                 holder.mRestaurantStatus.setText(restaurant.getStatus());
             }
+
+            boolean isFavourite = MySharedPreference.getInstance(mContext).getPreference(restaurant.getRestaurantId());
+            holder.mFavourite.setVisibility(isFavourite ? View.VISIBLE : View.GONE);
         }
     }
 

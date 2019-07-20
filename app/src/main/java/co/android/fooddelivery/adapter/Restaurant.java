@@ -21,6 +21,7 @@ public class Restaurant extends RecyclerView.ViewHolder implements View.OnClickL
     public TextView mRestaurantName;
     public TextView mRestaurantDescription;
     public TextView mRestaurantStatus;
+    public View mFavourite;
 
     public Restaurant(View itemView, RecyclerViewClickListener listener) {
         super(itemView);
@@ -29,6 +30,7 @@ public class Restaurant extends RecyclerView.ViewHolder implements View.OnClickL
         mRestaurantName = itemView.findViewById(R.id.restaurant_name);
         mRestaurantDescription = itemView.findViewById(R.id.restaurant_description);
         mRestaurantStatus = itemView.findViewById(R.id.restaurant_status);
+        mFavourite = itemView.findViewById(R.id.favorite);
 
         itemView.setOnClickListener(this);
     }

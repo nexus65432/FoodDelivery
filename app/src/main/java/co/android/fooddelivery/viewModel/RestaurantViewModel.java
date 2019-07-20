@@ -108,7 +108,14 @@ public class RestaurantViewModel extends ViewModel {
                     model.setRestaurantDescription(info.getDescription());
                     model.setRestaurantImageUrl(info.getImageUrl());
                     if (info.getBusiness() != null && info.getBusiness().getName() != null) {
-                        model.setRestaurantName(info.getBusiness().getName());
+
+                        if (info.getBusiness().getName() != null) {
+                            model.setRestaurantName(info.getBusiness().getName());
+                        }
+
+                        if (info.getBusiness().getName() != null) {
+                            model.setRestaurantId(info.getBusiness().getId());
+                        }
                     }
 
                     // ToDo: Define as constant variable

@@ -22,6 +22,7 @@ import co.android.fooddelivery.R;
 import co.android.fooddelivery.adapter.RestaurantsAdapter;
 import co.android.fooddelivery.listener.RecyclerViewClickListener;
 import co.android.fooddelivery.model.RestaurantModel;
+import co.android.fooddelivery.util.MySharedPreference;
 import co.android.fooddelivery.viewModel.RestaurantViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // to be moved globally
+        MySharedPreference.getInstance(this);
 
         mRestaurantsListView = findViewById(R.id.recylerView);
         mDefaultMessage = findViewById(R.id.error_message);
@@ -119,8 +123,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view, int position) {
             Log.d(TAG, "User Clicked at position " + position);
-            String displayText = mRestaurantModels.get(position).getRestaurantName();
+
+            RestaurantModel model = mRestaurantModels.get(position);
+            String displayText = model.getRestaurantName();
+            long restaurantId = model.getRestaurantId();
+
+            MySharedPreference.getInstance(MainActivity.this).savePreference(restaurantId, !model.isFavourite());
+            //mRestaurantModels.get(position).setFavourite(!model.isFavourite());
+
+            MySharedPreference.getInstance(MainActivity.this).savePreference(restaurantId, model.isFavourite());
             Toast.makeText(MainActivity.this, "Clicked on " + displayText, Toast.LENGTH_SHORT).show();
+
+            //mRestaurantsAdapter.setNewRestaurants(mRestaurantModels);
+            mRestaurantsAdapter.notifyDataSetChanged();
         }
     };
 

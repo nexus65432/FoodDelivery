@@ -2,10 +2,20 @@ package co.android.fooddelivery.model;
 
 public class RestaurantModel {
 
+    long restaurantId;
     String restaurantImageUrl;
     String restaurantName; // "name": "Tommy Thai" under Business
     String restaurantDescription; // "description": "Thai, Cambodian",
     String status; // "status": "26 mins",
+    boolean isFavourite;
+
+    public long getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(long restaurantId) {
+        this.restaurantId = restaurantId;
+    }
 
     public String getRestaurantImageUrl() {
         return restaurantImageUrl;
@@ -37,5 +47,13 @@ public class RestaurantModel {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }
